@@ -24,5 +24,7 @@
     </config-file>
     <header-file src="src/ios/GetAjaxRequest.h"/>
     <source-file src="src/ios/GetAjaxRequest.m"/>
+    <header-file src="src/ios/MyUrlCache.h"/>
+    <source-file src="src/ios/MyUrlCache.m"/>
   </platform>
 </plugin>

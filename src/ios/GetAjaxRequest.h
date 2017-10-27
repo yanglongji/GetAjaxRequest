@@ -1,18 +1,16 @@
-#import "CDVPlugin.h"
+#import <Cordova/CDVPlugin.h>
 
 @interface GetAjaxRequest : CDVPlugin
 {
-    CDVInvokedUrlCommand *_tempCommand;
-    NSString *_targetUrl;
+
 }
 
-@property(retain, nonatomic) NSString *targetUrl; // @synthesize targetUrl=_targetUrl;
-@property(retain, nonatomic) CDVInvokedUrlCommand *tempCommand; // @synthesize tempCommand=_tempCommand;
+@property(retain, nonatomic) NSString *targetUrl; 
+@property(retain, nonatomic) CDVInvokedUrlCommand *tempCommand;
 
-- (void)pluginInitialize;
 - (void)get:(CDVInvokedUrlCommand *)command;
 - (void)clearCookie:(CDVInvokedUrlCommand *)command;
 - (void)setCookie:(CDVInvokedUrlCommand *)command;
-- (void)openURL:(CDVInvokedUrlCommand *)command;
+- (void)getNotification:(NSNotification *)notification;
 
 @end
