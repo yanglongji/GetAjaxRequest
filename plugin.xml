@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="GetAjaxRequest"
+        version="1.0.0">
+  <name>GetAjaxRequest</name>
+  <license>MIT license</license>
+  <description>WebView中截获ajax请求</description>
+  <keywords>ajax</keywords>
+  <repo>https://github.com/yanglongji/GetAjaxRequest</repo>
+  <issue>https://github.com/yanglongji/GetAjaxRequest/issues</issue>
+  
+    <js-module src="www/GetAjaxRequest.js" name="GetAjaxRequest">
+      <runs/>
+      <clobbers target="GetAjaxRequest"/>
+    </js-module>
+  
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="GetAjaxRequest">
+        <param name="ios-package" value="GetAjaxRequest"/>
+        <param name="onload" value="true"/>
+      </feature>
+    </config-file>
+    <header-file src="src/ios/GetAjaxRequest.h"/>
+    <source-file src="src/ios/GetAjaxRequest.m"/>
+  </platform>
+</plugin>

@@ -1,0 +1,15 @@
+{
+    "version": "0.0.1",
+    "name": "GetAjaxRequest",
+    "cordova_name": "WebView中截获ajax请求",
+    "description": "WebView中截获ajax请求",
+    "license": "MIT license",
+    "repo": "https://github.com/yanglongji/GetAjaxRequest",
+    "issue": "https://github.com/yanglongji/GetAjaxRequest/issues",
+    "keywords": [
+        "ajax"
+    ],
+    "platforms": [
+        "ios"
+    ]
+}
