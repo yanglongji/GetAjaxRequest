@@ -27,6 +27,8 @@
     */
     MyUrlCache *cache = [[MyUrlCache alloc] init];
     [cache removeAllCachedResponses];
+    
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
 - (void)setCookie:(CDVInvokedUrlCommand *)command{
