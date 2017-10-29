@@ -16,21 +16,22 @@
     self.tempCommand = command;
 }
 
-- (void)clearCookie:(CDVInvokedUrlCommand *)command{
+- (void)clear:(CDVInvokedUrlCommand *)command{
+    MyUrlCache *cache = [[MyUrlCache alloc] init];
+    [cache removeAllCachedResponses];
+    
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+}
     /*
+- (void)clearCookie:(CDVInvokedUrlCommand *)command{
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray *cookieAry = [cookieJar cookiesForURL: [NSURL URLWithString: @"https://alimama.com/"]];
     for (cookie in cookieAry) {
         [cookieJar deleteCookie: cookie];
     }
-    */
-    MyUrlCache *cache = [[MyUrlCache alloc] init];
-    [cache removeAllCachedResponses];
-    
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
-
+    */
 - (void)setCookie:(CDVInvokedUrlCommand *)command{
     NSString * c = [NSString stringWithFormat:@"%@",command.arguments[0]];
     NSArray * cookies = [c componentsSeparatedByString:@";"];
