@@ -32,7 +32,7 @@
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="GetAjaxRequest">
-        <param name="android-package" value="com.jianshi.GetAjaxRequest"/>
+        <param name="android-package" value="com.jianshi.tools"/>
         <param name="onload" value="true"/>
       </feature>
     </config-file>
