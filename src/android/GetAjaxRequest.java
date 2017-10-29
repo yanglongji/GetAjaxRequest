@@ -24,6 +24,7 @@ public class GetAjaxRequest extends CordovaPlugin{
             CookieSyncManager.createInstance(this.cordova.getActivity());
             CookieSyncManager.getInstance().sync();
           }
+          callbackContext.success();
         }
         return  false;
     }
