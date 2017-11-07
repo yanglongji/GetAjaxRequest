@@ -19,7 +19,6 @@
     <config-file target="config.xml" parent="/*">
       <feature name="GetAjaxRequest">
         <param name="ios-package" value="GetAjaxRequest"/>
-        <param name="onload" value="true"/>
       </feature>
     </config-file>
     <header-file src="src/ios/GetAjaxRequest.h"/>
@@ -33,7 +32,6 @@
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="GetAjaxRequest">
         <param name="android-package" value="com.jianshi.tools.GetAjaxRequest"/>
-        <param name="onload" value="true"/>
       </feature>
     </config-file>
     <source-file src="src/android/GetAjaxRequest.java" target-dir="src/com/jianshi/tools"/>
