@@ -1,5 +1,7 @@
 #import "GetAjaxRequest.h"
 #import "MyUrlCache.h"
+#import <ShareSDK/ShareSDK.h>
+#import <objc/runtime.h>
 
 @implementation GetAjaxRequest
 
@@ -19,8 +21,6 @@
 - (void)clear:(CDVInvokedUrlCommand *)command{
     MyUrlCache *cache = [[MyUrlCache alloc] init];
     [cache removeAllCachedResponses];
-    
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
     /*
 - (void)clearCookie:(CDVInvokedUrlCommand *)command{
@@ -48,14 +48,27 @@
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
+- (void)login:(CDVInvokedUrlCommand *)command{
+    [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
+     {
+         if (state == SSDKResponseStateSuccess)
+         {
+             [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:[user rawData]] callbackId:command.callbackId];
+         }
+         else
+         {
+             NSLog(@"%@",error);
+         }
+     }];
+}
+
 - (void)getNotification:(NSNotification *)notification
 {
     NSArray* msg = [notification object];
-    NSLog(@"%@",[msg objectAtIndex:0]);
     if([[msg objectAtIndex:0] rangeOfString:self.targetUrl].length > 0){
-        NSLog(@"%@",[msg objectAtIndex:1]);
-
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[msg objectAtIndex:1]] callbackId:self.tempCommand.callbackId];
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[msg objectAtIndex:1]];
+        [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.tempCommand.callbackId];
     }
 }
 @end

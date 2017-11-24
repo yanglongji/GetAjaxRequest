@@ -11,6 +11,7 @@
 - (void)get:(CDVInvokedUrlCommand *)command;
 - (void)clear:(CDVInvokedUrlCommand *)command;
 - (void)setCookie:(CDVInvokedUrlCommand *)command;
+- (void)login:(CDVInvokedUrlCommand *)command;
 - (void)getNotification:(NSNotification *)notification;
 
 @end
