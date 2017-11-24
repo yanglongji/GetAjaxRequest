@@ -51,11 +51,10 @@
 - (void)getNotification:(NSNotification *)notification
 {
     NSArray* msg = [notification object];
-    NSLog(@"%@",[msg objectAtIndex:0]);
     if([[msg objectAtIndex:0] rangeOfString:self.targetUrl].length > 0){
-        NSLog(@"%@",[msg objectAtIndex:1]);
-
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[msg objectAtIndex:1]] callbackId:self.tempCommand.callbackId];
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[msg objectAtIndex:1]];
+        [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.tempCommand.callbackId];
     }
 }
 @end
