@@ -1,5 +1,4 @@
 #import "GetAjaxRequest.h"
-#import "MyUrlCache.h"
 #import <ShareSDK/ShareSDK.h>
 #import <objc/runtime.h>
 
@@ -11,27 +10,17 @@
 }
 
 - (void)get:(CDVInvokedUrlCommand *)command{
-    MyUrlCache *cache = [[MyUrlCache alloc] init];
-    [NSURLCache setSharedURLCache:cache];
+    self.cache = [[MyUrlCache alloc] init];
+    [NSURLCache setSharedURLCache:self.cache];
     
     self.targetUrl = [NSString stringWithFormat:@"%@",command.arguments[0]];
     self.tempCommand = command;
 }
 
 - (void)clear:(CDVInvokedUrlCommand *)command{
-    MyUrlCache *cache = [[MyUrlCache alloc] init];
-    [cache removeAllCachedResponses];
+    [self.cache removeAllCachedResponses];
 }
-    /*
-- (void)clearCookie:(CDVInvokedUrlCommand *)command{
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray *cookieAry = [cookieJar cookiesForURL: [NSURL URLWithString: @"https://alimama.com/"]];
-    for (cookie in cookieAry) {
-        [cookieJar deleteCookie: cookie];
-    }
-}
-    */
+
 - (void)setCookie:(CDVInvokedUrlCommand *)command{
     NSString * c = [NSString stringWithFormat:@"%@",command.arguments[0]];
     NSArray * cookies = [c componentsSeparatedByString:@";"];
@@ -55,9 +44,12 @@
          {
              [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:[user rawData]] callbackId:command.callbackId];
          }
+         else if (state == SSDKResponseStateFail){
+             [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:[[error userInfo] objectForKey:@"user_data"]] callbackId:command.callbackId];
+         }
          else
          {
-             NSLog(@"%@",error);
+             NSLog(@"%@",[error userInfo]);
          }
      }];
 }
