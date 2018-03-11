@@ -13,8 +13,9 @@ GetAjaxRequest.setCookie = function(cookie,domain,callback) {
     exec(callback,null, "GetAjaxRequest", "setCookie", [cookie,domain]);
 };
 
-GetAjaxRequest.login = function(callback) {
-    exec(callback,null, "GetAjaxRequest", "login", []);
+GetAjaxRequest.login = function(successCallback, errorCallback) {
+    exec(successCallback, errorCallback, "GetAjaxRequest", "login", []);
 };
+
 
 module.exports = GetAjaxRequest;

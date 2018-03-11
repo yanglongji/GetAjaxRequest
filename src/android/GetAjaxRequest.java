@@ -51,14 +51,17 @@ public class GetAjaxRequest extends CordovaPlugin{
 
       @Override
       public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-        Log.d("sqb",hashMap.toString());
         paramCallbackContext.success(new JSONObject(hashMap));
       }
 
       @Override
       public void onError(Platform arg0, int arg1, Throwable arg2) {
         // TODO Auto-generated method stub
-        arg2.printStackTrace();
+        try {
+          paramCallbackContext.error(new JSONObject(arg2.getMessage()));
+        }catch (JSONException e) {
+          e.printStackTrace();
+        }
       }
 
 
