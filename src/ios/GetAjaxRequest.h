@@ -1,11 +1,13 @@
 #import <Cordova/CDVPlugin.h>
+#import "MyUrlCache.h"
 
 @interface GetAjaxRequest : CDVPlugin
 {
 
 }
 
-@property(retain, nonatomic) NSString *targetUrl; 
+@property(retain, nonatomic) MyUrlCache *cache;
+@property(retain, nonatomic) NSString *targetUrl;
 @property(retain, nonatomic) CDVInvokedUrlCommand *tempCommand;
 
 - (void)get:(CDVInvokedUrlCommand *)command;
